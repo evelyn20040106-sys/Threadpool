@@ -62,7 +62,7 @@ public:
 				throw std::runtime_error("stopped ThreadPool!");
 
 			//向任务队列添加任务，函数[task]{}，函数体是(*task)()，因为它已经被制作好了，参数函数都被绑定了，可直接执行。
-			tasks.emplace([task]() { (*task)(); });	
+			tasks.emplace([task = std::move(task)]() { (*task)(); });
 
 		}	//出作用域，释放锁
 
